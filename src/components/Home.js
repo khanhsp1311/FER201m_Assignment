@@ -22,7 +22,7 @@ const Home = () => {
 				.then((res) => res.json())
 				.then((res) => {
 					const alb = res?.filter(
-						(item) => item?.userId?.toString() === user?.id?.toString()
+						(item) => item?.userId?.toString() == user?.id?.toString()
 					);
 					setAlbums([...alb]);
 				});
@@ -31,14 +31,12 @@ const Home = () => {
 
 	useEffect(() => {
 		if (user && albums) {
-			fetch("http://localhost:8000/movie",{
-				method: "GET",
-			})
+			fetch("https://jsonplaceholder.typicode.com/photos")
 				.then((res) => res.json())
 				.then((res) => {
 					const abs = res?.filter((item) => {
 						const some = albums?.some(
-							(infor) => infor?.id?.toString() === item?.albumId?.toString()
+							(infor) => infor?.id?.toString() == item?.albumId?.toString()
 						);
 						if (some) {
 							return item;

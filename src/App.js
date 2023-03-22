@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 import { createContext, useState } from "react";
@@ -14,7 +15,9 @@ function App() {
 			<Router>
 				<div className="App">
 					<Routes>
-						<Route path="/" element={<Login />} />
+
+						<Route path="/" element={<Register />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="/create" element={<Create />} />
 						<Route path="/albums/:slug" element={<Home />} />
 						<Route path="/detail/:slug/:id" element={<Detail />} />

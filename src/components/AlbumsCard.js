@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-const AlbumsCard = ({ item }) => {
+const AlbumsCard = ({ item }) => { // item là cái người đăng nhập được thấy
 	return (
-		<Link className="card_wrap" to={`/detail/${item.albumId}/${item?.id}`}>
+		<Link className="card_wrap" to={`/detail/${item.albumId}/${item?.id}`}> // ấn vào đây thì ra detail
 			<div className="card">
 				<div className="card_img">
 					<img src={item?.thumbnailUrl} alt="anh" />
