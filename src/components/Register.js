@@ -116,6 +116,7 @@ const Login = () => {
               name: username,
               email,
               password,
+              role: "Member"
             };
         
             fetch("http://localhost:3000/users", {
