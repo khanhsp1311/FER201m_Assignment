@@ -110,7 +110,7 @@ const Home = () => {
 							<button onClick={handleSearch}>search</button>
 						</div>
 						<div className="user_name">
-							<i>user:{user?.name}</i>
+							<i>user:{user?.email}</i>
 							<div>
 								<Link to="/create">Create new a Photo</Link>
 							</div>

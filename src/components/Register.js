@@ -103,10 +103,12 @@ const Login = () => {
               window.alert("Confirm password different from password");
               return;
             }
-            const some = account.find( // tìm thấy some != null
-              (item) => item?.email === email
-            );
-            if(some != null || some != ""){
+            // const some = account.find( // tìm thấy some != null
+            //   (item) => item?.email === email
+            // );
+            const some = account.find((e) => e.email === email);
+            console.log("đây là some "+some); // bằng undefined thì chạy xuống dưới để lưu
+            if(some != undefined) {
               window.alert("Mail is existed");
               return;
             }
@@ -140,18 +142,18 @@ const Login = () => {
 
 
     return (
-        <div class="wrapper">
-            <form class="form-signin">
-                <h2 class="form-signin-heading">Please Sign Up</h2>
-                <input type="text" ref={nameRef} class="form-control" name="username" placeholder="Your Name" required="" autofocus="" />
-                <input type="text" ref={emailRef} class="form-control" name="username" placeholder="Email Address" required=""
+        <div className="wrapper">
+            <form className="form-signin">
+                <h2 className="form-signin-heading">Please Sign Up</h2>
+                <input type="text" ref={nameRef} className="form-control" name="username" placeholder="Your Name" required="" autofocus="" />
+                <input type="text" ref={emailRef} className="form-control" name="username" placeholder="Email Address" required=""
                     autofocus="" />
-                <input type="password" ref={passRef} class="form-control" name="password" placeholder="Password" required="" />
-                <input type="password" ref={repassRef} class="form-control" name="cfpassword" placeholder="Confirm Password" required="" />
-                <label class="checkbox">
+                <input type="password" ref={passRef} className="form-control" name="password" placeholder="Password" required="" />
+                <input type="password" ref={repassRef} className="form-control" name="cfpassword" placeholder="Confirm Password" required="" />
+                <label className="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" /> Remember me
                 </label>
-                <button class="btn btn-lg btn-primary btn-block" onClick={handleSignUp} type="submit">Register</button>
+                <button className="btn btn-lg btn-primary btn-block" onClick={handleSignUp} type="submit">Register</button>
             </form>
         </div>
     );
