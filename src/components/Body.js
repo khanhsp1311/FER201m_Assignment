@@ -83,13 +83,17 @@ const Body = () => {
   // alert(index);
   if (window.confirm("Are you sure you want to delete this student")) {
     let newStudentDelete = [...Listmovie];
-    newStudentDelete.splice(index, 1);
+    newStudentDelete.filter((e) => e.id !== index);
     setListMovie(newStudentDelete);
   }
  }
  const navigate = useNavigate();
  function handleAdd(){
   navigate('/edit')
+ }
+
+ function update(index){
+alert(index);
  }
 
   return (
@@ -162,15 +166,29 @@ const Body = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" variant="contained">
-                    Đánh giá
-                  </Button>
-                  <Button size="small" variant="contained" onClick={() => setSearchValue(search)}>
+                  <Link to={`movie-detail/${movie.id}`}>
+                    <Button size="small" variant="contained">
+                      Đánh giá
+                    </Button>
+                  </Link>
+                
+              {
+                user?.role === 'Admin' ? 
+                <Button size="small" variant="contained" onClick={() => update(index)}>
                Update
-              </Button>
-              <Button size="small" variant="contained" onClick={() => deleteMovie(index)}>
+              </Button> : ""
+
+
+              }
+
+              {
+                user?.role === 'Admin' ? 
+                <Button size="small" variant="contained" onClick={() => deleteMovie(index)}>
               Delete
-              </Button>
+              </Button> : ""
+
+
+              }
                 </CardActions>
               </Card>
             </Grid>

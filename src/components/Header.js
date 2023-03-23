@@ -25,6 +25,9 @@ const navigate = useNavigate();
   function signUp(){
     navigate('/register');
   }
+  function logout(){
+    navigate('/:id');
+  }
   return (
 
     <div>
@@ -48,12 +51,16 @@ const navigate = useNavigate();
                 </li>
                 <li id="sign-in">
                   {
-                    user?.role != null ? <p>user:{user?.role}</p> : <button   onClick={login} style={{alignItem: "center", border: 'none', justifyContent: "center", backgroundColor: "#CBBFE6", fontWeight: "Bold", color: "#5A5566"}}>Đăng Nhập</button>
+                    user?.role != null ? <button style={{border: 'none'}}>user:{user?.role}: {user?.name}</button> : <button   onClick={login} style={{alignItem: "center", border: 'none', justifyContent: "center", backgroundColor: "#CBBFE6", fontWeight: "Bold", color: "#5A5566"}}>Đăng Nhập</button>
                   }
                
                 </li>
                 <li id="sign-up">
-                <button className="rounded" onClick={signUp} style={{backgroundColor: "#CBBFE6",border:'none', fontWeight: "Bold", color: "#5A5566"}}>Đăng Ký</button>
+                {
+                    user?.role != null ?  <button   onClick={logout} style={{alignItem: "center", border: 'none', justifyContent: "center", backgroundColor: "#CBBFE6", fontWeight: "Bold", color: "#5A5566"}}>Đăng Xuất</button> : <button   onClick={login} style={{alignItem: "center", border: 'none', justifyContent: "center", backgroundColor: "#CBBFE6", fontWeight: "Bold", color: "#5A5566"}}>Đăng Ký</button>
+                  }
+               
+                
                 </li>
               </ul>
             </span>

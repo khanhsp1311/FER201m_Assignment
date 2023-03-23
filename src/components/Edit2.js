@@ -72,10 +72,10 @@ const Login = () => {
 				<h2 className="form-signin-heading">Add New Movies</h2>
 
                 img,name, year, type, grade
-				<input type="text" className="form-control" ref={imgRef}  placeholder="images" required="" autofocus="" />
+				<input type="file" className="form-control" ref={imgRef}  required="" autofocus="" />
 				<input type="text" className="form-control" ref={nameRef}  placeholder="Name" required="" autofocus="" />
 				<input type="number" className="form-control" ref={yearRef}  placeholder="Year" required="" autofocus="" />
-    				<input type="text" className="form-control" ref={typeRef}  placeholder="Type of movies" required="" autofocus="" />
+    				<input type="text" className="form-control" ref={typeRef}  placeholder="Type" required="" autofocus="" />
     				<input type="number" className="form-control" ref={typeIdO}  placeholder="Type" required="" autofocus="" />
 				<button className="btn btn-lg btn-primary btn-block" onClick={handleLogin} type="submit">Add New</button>
 			</form>
