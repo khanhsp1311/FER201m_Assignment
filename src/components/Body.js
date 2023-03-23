@@ -24,6 +24,16 @@ const Body = () => {
   const { user } = useContext(UserContent);
   const [Listmovie, setListMovie] = useState(movie);
 
+  useEffect(() => {
+		fetch("http://localhost:3000/movies",
+			{ method: "GET" }
+		)
+			.then((res) => res.json())
+			.then((res) => {
+				setListMovie(res);
+			});
+	}, []);
+
   // search movie
   const [search, setSearch] = useState("");
 

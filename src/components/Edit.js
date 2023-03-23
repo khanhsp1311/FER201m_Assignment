@@ -13,6 +13,7 @@ const Login = () => {
 	const nameRef = useRef();
     const imgRef = useRef();
     const typeRef = useRef();
+    const typeIdO = useRef();
 	const navigate = useNavigate();
 	useEffect(() => {
 		fetch("http://localhost:3000/movies",
@@ -24,20 +25,22 @@ const Login = () => {
 			});
 	}, []);
 
-	const handleLogin = () => {
+	const handleLogin = (event) => {
+        event.preventDefault();
 		const nameMoviesO = nameRef.current.value;
 		const imgMoviesO = imgRef.current.value;
 		const yearRefO = yearRef.current.value;
 		const typeRefO = typeRef.current.value;
+		const typeIDO = typeIdO.current.value;
 		let id = account.length + 1;
         let newStudent = {
             id: id,
            image: imgMoviesO,
            name: nameMoviesO,
            Year: yearRefO,
-           type: typeRef,
+           type: typeRefO,
            score: 0,
-           typeID: typeRefO
+           typeID: typeIDO
           };
           console.log(newStudent);
 		// setAccount([...account, newStudent]);
@@ -70,7 +73,8 @@ const Login = () => {
 				<input type="file" className="form-control" ref={imgRef}  required="" autofocus="" />
 				<input type="text" className="form-control" ref={nameRef}  placeholder="Name" required="" autofocus="" />
 				<input type="number" className="form-control" ref={yearRef}  placeholder="Year" required="" autofocus="" />
-    				<input type="number" className="form-control" ref={typeRef}  placeholder="Type" required="" autofocus="" />
+    				<input type="text" className="form-control" ref={typeRef}  placeholder="Type" required="" autofocus="" />
+    				<input type="number" className="form-control" ref={typeIdO}  placeholder="Type" required="" autofocus="" />
 				<button className="btn btn-lg btn-primary btn-block" onClick={handleLogin} type="submit">Add New</button>
 			</form>
 		</div>
