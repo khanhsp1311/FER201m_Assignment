@@ -5,7 +5,7 @@ import { UserContent } from "../App";
 import "./style.css";
 const Login = () => {
 	const [account, setAccount] = useState([]);
-	
+
 	// nó ở trên cùng một trang nên cứ import cho nhau thôi
 	const { setUser } = useContext(UserContent);
 	const emailRef = useRef();
@@ -14,7 +14,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	useEffect(() => {
 		fetch("http://localhost:3000/users",
-		{method : "GET"}
+			{ method: "GET" }
 		)
 			.then((res) => res.json())
 			.then((res) => {
@@ -37,16 +37,16 @@ const Login = () => {
 			return window.alert("Username or email is not correct");
 		}
 		setUser({ ...some }); // dải ra đối tươngj some
-		navigate("/albums/all"); // thanh cong điều hướng đến đây
+		navigate("/:id"); // thanh cong điều hướng đến đây
 	};
 	return (
-				<div className="wrapper">
+		<div className="wrapper">
 			<form className="form-signin">
 				<h2 className="form-signin-heading">Please login</h2>
 				<input type="text" className="form-control" ref={nameRef} name="username" placeholder="Email Address" required="" autofocus="" />
 				<input type="password" ref={emailRef} className="form-control" name="password" placeholder="Password" required="" />
 				<label className="checkbox">
-					<input type="text" value="remember-me" id="rememberMe" name="rememberMe" /> Remember me
+					<input type="checkbox" /> Remember me
 				</label>
 				<button className="btn btn-lg btn-primary btn-block" onClick={handleLogin} type="submit">Login</button>
 			</form>

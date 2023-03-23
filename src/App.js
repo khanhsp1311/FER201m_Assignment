@@ -1,31 +1,35 @@
-import logo from "./logo.svg";
-import "./App.css";
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createContext } from "react";
+
+// import data from "./components/data.json";
+import React, { useEffect, useMemo, useState } from "react";
+import Home from "./components/Home";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home";
-import Detail from "./components/Detail";
-import { createContext, useState } from "react";
-import Create from "./components/Create";
+import Body from "./components/Body";
 export const UserContent = createContext();
-function App() {
-	const [user, setUser] = useState({});
-	return (
-		<UserContent.Provider value={{ setUser, user }}>
-			<Router>
-				<div className="App">
-					<Routes>
 
-						<Route path="/" element={<Register />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/create" element={<Create />} />
-						<Route path="/albums/:slug" element={<Home />} />
-						<Route path="/detail/:slug/:id" element={<Detail />} />
-					</Routes>
-				</div>
-			</Router>
-		</UserContent.Provider>
-	);
+function App() {
+  const [user, setUser] = useState({});
+  return (
+    <UserContent.Provider value={{ setUser, user }}>
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/:id" element={<Body />} />
+          <Route path="/" element={<Body />} />
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />} /> // định nghĩa path
+        </Routes>
+
+      </div>
+    </Router>
+    </UserContent.Provider>
+  );
 }
 
 export default App;
