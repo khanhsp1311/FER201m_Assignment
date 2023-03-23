@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Edit from "./components/Edit";
 import Body from "./components/Body";
 export const UserContent = createContext();
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Body />} />
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />} /> // định nghĩa path
+          <Route path="/edit" element={<Edit />} /> // định nghĩa path
         </Routes>
 
       </div>

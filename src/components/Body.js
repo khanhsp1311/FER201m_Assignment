@@ -1,7 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
+import React, {useContext,useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContent } from "../App";
 import "./Body.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useMemo, useState } from "react";
 import movie from "./data.json";
 import {
   Grid,
@@ -18,6 +21,7 @@ import {
 
 const Body = () => {
   // view list movie
+  const { user } = useContext(UserContent);
   const [Listmovie, setListMovie] = useState(movie);
 
   // search movie
@@ -65,6 +69,18 @@ const Body = () => {
     console.log(listMovieType)
  ), [listMovieType])
 
+ function deleteMovie(index){
+  // alert(index);
+  if (window.confirm("Are you sure you want to delete this student")) {
+    let newStudentDelete = [...Listmovie];
+    newStudentDelete.splice(index, 1);
+    setListMovie(newStudentDelete);
+  }
+ }
+ const navigate = useNavigate();
+ function handleAdd(){
+  navigate('/edit')
+ }
 
   return (
     <div className="container-fluid d-flex row">
@@ -104,12 +120,20 @@ const Body = () => {
               <Button variant="outlined" onClick={() => setSearchValue(search)}>
                 Search
               </Button>
+              {
+                user?.role === 'Admin' ? 
+                <Button variant="outlined" onClick={handleAdd}>
+                Add new  
+               </Button> : ""
+              }
+             
             </Stack>
           </Box>
         </React.Fragment>
 
         <Grid container>
-          {listMovieType.map((movie) => (
+          {
+          listMovieType.map((movie,index) => (
             <Grid item sm={4} style={{ marginBottom: "2rem" }}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardMedia sx={{ height: 500 }} image={movie.image} />
@@ -131,6 +155,12 @@ const Body = () => {
                   <Button size="small" variant="contained">
                     Đánh giá
                   </Button>
+                  <Button size="small" variant="contained" onClick={() => setSearchValue(search)}>
+               Update
+              </Button>
+              <Button size="small" variant="contained" onClick={() => deleteMovie(index)}>
+              Delete
+              </Button>
                 </CardActions>
               </Card>
             </Grid>

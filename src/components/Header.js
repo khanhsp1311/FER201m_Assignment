@@ -12,7 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = () => {
   // const[check]
-  const { setUser } = useContext(UserContent);
+  const { user } = useContext(UserContent);
+  // const { setUser } = useContext(UserContent);
   // <Routes>
   //       <Route path="/login" element={<Login />} />
   //       <Route path="/register" element={<Register />} />
@@ -46,17 +47,13 @@ const navigate = useNavigate();
                   <p><Link to="/" style={{ color: "white", textDecoration: "none" }}>Trang chủ</Link></p>
                 </li>
                 <li id="sign-in">
-                  <button  onClick={login}>Đăng Nhập</button>
-                  {/* <p> */}
-                  {/* <Link to="/login">Đăng nhập</Link> */}
-                  {/* </p> */}
+                  {
+                    user?.role != null ? <p>user:{user?.role}</p> : <button   onClick={login} style={{alignItem: "center", border: 'none', justifyContent: "center", backgroundColor: "#CBBFE6", fontWeight: "Bold", color: "#5A5566"}}>Đăng Nhập</button>
+                  }
+               
                 </li>
                 <li id="sign-up">
-                <button onClick={signUp}>Đăng Ký</button>
-
-                  {/* <p>
-                  <Link to="/register">Đăng kí</Link>
-                  </p> */}
+                <button className="rounded" onClick={signUp} style={{backgroundColor: "#CBBFE6",border:'none', fontWeight: "Bold", color: "#5A5566"}}>Đăng Ký</button>
                 </li>
               </ul>
             </span>
