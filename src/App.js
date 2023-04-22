@@ -10,10 +10,10 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Edit from "./components/Edit";
-import Edit2 from "./components/Edit2";
+
 import Body from "./components/Body";
 import MovieDetail from "./components/MovieDetail";
-
+import Update from './components/update'
 export const UserContent = createContext();
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />} /> // định nghĩa path
           <Route path="/edit" element={<Edit />} /> // định nghĩa path
-          <Route path="/edit/:id" element={<Edit2 />} /> // định nghĩa path
+          <Route path="/edit2/:id" element={<Update/>} /> // định nghĩa path
         </Routes>
 
       </div>

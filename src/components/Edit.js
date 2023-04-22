@@ -5,11 +5,9 @@ import { UserContent } from "../App";
 import "./style.css";
 const Login = () => {
 	const [account, setAccount] = useState([]); 
-
     // khi chạy đến đây và submit nó sẽ lấy dữ liệu rồi add vào
 	const { setUser } = useContext(UserContent);
 	const yearRef = useRef();
-
 	const nameRef = useRef();
     const imgRef = useRef();
     const typeRef = useRef();
@@ -24,9 +22,6 @@ const Login = () => {
 				setAccount(res);
 			});
 	}, []);
-
-	
-
 	const handleLogin = (event) => {
         event.preventDefault();
 		const nameMoviesO = nameRef.current.value;
@@ -44,34 +39,29 @@ const Login = () => {
            score: 0,
            typeID: typeIDO
           };
-          console.log(newStudent);
-		// setAccount([...account, newStudent]);
-
-        fetch("http://localhost:3000/movies", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(newStudent),
-            })
-              .then((res) => res.json())
-              .then((res) => {
-                setUser(res); // set user ở đây sau khi lấy được thông tin từ server
-                navigate("/:id");;
-              })
-              .catch((error) => {
-                console.log(error);
-                window.alert("Cannot create new account!");
-              });
-          };
-
+          console.log(JSON.stringify(newStudent));
 		
+		fetch(`http://localhost:3000/movies`, {
+			method: "POST",
+			headers: {
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify(newStudent),
+		  })
+			.then((res) => res.json())
+			.then((res) => {
+			  setAccount(account); // set user ở đây sau khi lấy được thông tin từ server
+			  navigate("/:id");
+			})
+			.catch((error) => {
+			  console.log(error);
+			  window.alert("Cannot create account!");
+			});
+          };
 	return (
 		<div className="wrapper">
 			<form className="form-signin">
 				<h2 className="form-signin-heading">Add New Movies</h2>
-
-                img,name, year, type, grade
 				<input type="text" className="form-control" ref={imgRef}  placeholder="images" required="" autofocus="" />
 				<input type="text" className="form-control" ref={nameRef}  placeholder="Name" required="" autofocus="" />
 				<input type="number" className="form-control" ref={yearRef}  placeholder="Year" required="" autofocus="" />

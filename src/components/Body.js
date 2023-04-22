@@ -18,11 +18,13 @@ import {
   Stack,
   TextField
 } from "@mui/material";
+import { event } from "jquery";
 
 const Body = () => {
   // view list movie
   const { user } = useContext(UserContent);
   const [Listmovie, setListMovie] = useState(movie);
+  const [account, setAccount] = useState({});
 
   useEffect(() => {
 		fetch("http://localhost:3000/movies",
@@ -51,8 +53,9 @@ const Body = () => {
 
   const {id} = useParams();
 
-
+// alert('day la id '+id)
   // filter type
+  const [listMovieType2, setlistMovieType] = useState([])
   const listMovieType = useMemo(() => 
   {
     if(id){
@@ -72,28 +75,59 @@ const Body = () => {
       return [...Listmovie]
     }
   }, [searchValue, Listmovie, id]);
+  
   // -----------------------------------
 
 
   useEffect(() => (
-    console.log(listMovieType)
- ), [listMovieType])
+    setlistMovieType(listMovieType)
+ ), [listMovieType2])
 
- function deleteMovie(index){
-  // alert(index);
+ function deleteMovie(event){
+//   // alert(event.target.value);
+  let id = event.target.value;
   if (window.confirm("Are you sure you want to delete this student")) {
-    let newStudentDelete = [...Listmovie];
-    newStudentDelete.filter((e) => e.id !== index);
-    setListMovie(newStudentDelete);
+
+    fetch(`http://localhost:3000/movies/${id}`,{
+      method: 'GET'
+    }).then(res => res.json())
+    .then(response => { setAccount(response)});
+    
+console.log(Object.entries(account));
+  fetch(`http://localhost:3000/movies/${id}`,{
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(account)
+  })
+  .then(res => res.json())
+  .then(json => 
+  navigate('/:id'))
   }
- }
+  
+}
+
+//   // fetch(`http://localhost:3000/movies/${removeData.name}`, {
+//   // method: 'DELETE',
+//   // headers: {
+//   //     'Content-Type':'application/json'
+//   // },
+//   // body: JSON.stringify(functionAbove)
+//   // })
+//   // .then(res => res.json())
+//   // .then(json => displayData(json))
+ 
+ 
  const navigate = useNavigate();
  function handleAdd(){
   navigate('/edit')
  }
 
- function update(index){
-alert(index);
+ function update(event){
+  let id = event.target.value;
+// alert(id);
+navigate(`/edit2/${id}`)
  }
 
   return (
@@ -147,7 +181,7 @@ alert(index);
 
         <Grid container>
           {
-          listMovieType.map((movie,index) => (
+          Listmovie.map((movie,index) => (
             <Grid item sm={4} style={{ marginBottom: "2rem" }}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardMedia sx={{ height: 500 }} image={movie.image} />
@@ -174,7 +208,7 @@ alert(index);
                 
               {
                 user?.role === 'Admin' ? 
-                <Button size="small" variant="contained" onClick={() => update(index)}>
+                <Button size="small" variant="contained" onClick={update} value = {movie.id}>
                Update
               </Button> : ""
 
@@ -183,7 +217,7 @@ alert(index);
 
               {
                 user?.role === 'Admin' ? 
-                <Button size="small" variant="contained" onClick={() => deleteMovie(index)}>
+                <Button size="small" value={movie.id} variant="contained" onClick={deleteMovie}>
               Delete
               </Button> : ""
 
